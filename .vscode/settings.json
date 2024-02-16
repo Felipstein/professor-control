@@ -1,0 +1,22 @@
+{
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always",
+    "source.addMissingImports": "always",
+    "source.sortMembers": "always"
+  },
+  "eslint.workingDirectories": [
+    "./server",
+    "./web"
+  ],
+  "cSpell.words": [
+    "clsx",
+    "felipstein",
+    "tailwindcss",
+    "tanstack"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "env": {
+    "es2020": true
+  },
+  "extends": "@felipstein/eslint-config-react",
+  "ignorePatterns": ["dist"],
+  "plugins": ["react-refresh"],
+  "rules": {
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ],
+
+    "react/prop-types": "off",
+
+    "react/no-array-index-key": "off",
+
+    "no-plusplus": "off"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "professor-control",
+  "version": "0.1.0",
+  "license": "MIT",
+  "workspaces": ["server", "web", "packages/*"],
+  "private": true
+}
