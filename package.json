@@ -3,5 +3,9 @@
   "version": "0.1.0",
   "license": "MIT",
   "workspaces": ["server", "web", "packages/*"],
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev:server": "yarn workspace @professor-control/server dev",
+    "dev:web": "yarn workspace @professor-control/web dev"
+  }
 }

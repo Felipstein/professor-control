@@ -5,7 +5,7 @@ import { Button, ButtonIcon } from '@/components/ui/button';
 
 export function NotFoundPage() {
   return (
-    <div className="flex h-full min-h-screen flex-col items-center justify-center gap-4">
+    <div className="flex h-screen flex-col items-center justify-center gap-4">
       <p>Tá perdido amigo?</p>
 
       <Button size="sm" variant="outline" asChild>

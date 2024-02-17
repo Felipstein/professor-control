@@ -1,3 +1,14 @@
 {
-  "extends": "@felipstein/eslint-config-node"
+  "extends": "@rocketseat/eslint-config/node",
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": true
+      }
+    ],
+
+    "no-useless-constructor": "off"
+  }
 }

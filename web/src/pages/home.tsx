@@ -6,7 +6,7 @@ import { Button, ButtonIcon } from '@/components/ui/button';
 
 export function HomePage() {
   return (
-    <div className="flex h-full min-h-screen items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <div className="flex flex-col items-center gap-6">
         <ProfessorAvatarAnimated className="size-32" />
 

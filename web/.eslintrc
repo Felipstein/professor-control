@@ -2,7 +2,7 @@
   "env": {
     "es2020": true
   },
-  "extends": "@felipstein/eslint-config-react",
+  "extends": "@rocketseat/eslint-config/react",
   "ignorePatterns": ["dist"],
   "plugins": ["react-refresh"],
   "rules": {
@@ -11,10 +11,16 @@
       { "allowConstantExport": true }
     ],
 
-    "react/prop-types": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": true
+      }
+    ],
 
-    "react/no-array-index-key": "off",
+    "no-useless-constructor": "off",
 
-    "no-plusplus": "off"
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }

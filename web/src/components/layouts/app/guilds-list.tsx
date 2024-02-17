@@ -4,7 +4,6 @@ import {
 } from '@radix-ui/react-icons';
 import { useQuery } from '@tanstack/react-query';
 
-import { GuildAvatar } from '@/components/guild-avatar';
 import { GuildAvatarSkeleton } from '@/components/guild-avatar-skeleton';
 import {
   Tooltip,
@@ -13,6 +12,8 @@ import {
 } from '@/components/ui/tooltip';
 import { queryKeys } from '@/config/query-keys';
 import { makeGuildService } from '@/factories/make-guild-service';
+import { GuildButton } from '@/components/guild-button';
+import { Container } from '@/components/container';
 
 export function GuildsList() {
   const {
@@ -20,12 +21,12 @@ export function GuildsList() {
     isLoading: isLoadingGuilds,
     error: errorOnFetchGuilds,
   } = useQuery({
-    queryKey: queryKeys.guilds(),
+    queryKey: queryKeys.getGuilds(),
     queryFn: () => makeGuildService().getGuilds(),
   });
 
   return (
-    <div className="w-20 bg-black/30 px-4 py-8">
+    <Container className="my-3 mr-3 w-20 rounded-l-none px-4 py-8">
       <ul className="flex flex-col gap-4">
         {isLoadingGuilds &&
           Array.from({ length: 12 }).map((_, index) => (
@@ -66,12 +67,7 @@ export function GuildsList() {
             <li key={guild.id}>
               <Tooltip>
                 <TooltipTrigger>
-                  <GuildAvatar
-                    guildId={guild.id}
-                    guildName={guild.name}
-                    avatarKey={guild.avatarKey}
-                    className="size-12"
-                  />
+                  <GuildButton guild={guild} />
 
                   <TooltipContent>{guild.name}</TooltipContent>
                 </TooltipTrigger>
@@ -79,6 +75,6 @@ export function GuildsList() {
             </li>
           ))}
       </ul>
-    </div>
+    </Container>
   );
 }
