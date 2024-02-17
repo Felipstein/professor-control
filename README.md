@@ -1,0 +1,13 @@
+# Para fazer
+- Mencionar usuários
+- Responder mensagens
+- Enviar emojis
+- Enviar mensagens com cooldown
+- Enviar áudios
+- Fazer upload de arquivos
+- Entrar em chamadas
+- Ouvir os usuários das chamadas
+- Falar em chamadas
+- Receber mensagens do privado
+- Enviar mensagens no privado
+- Alterar entre bots
