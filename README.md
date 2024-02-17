@@ -11,3 +11,4 @@
 - Receber mensagens do privado
 - Enviar mensagens no privado
 - Alterar entre bots
+- Alterar o próprio sobrenome no servidor
