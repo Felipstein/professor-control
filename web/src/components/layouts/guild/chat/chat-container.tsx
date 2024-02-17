@@ -11,12 +11,16 @@ import { useEffect, useMemo, useRef } from 'react';
 import { AxiosError } from 'axios';
 import { ChatMessage } from './chat-message';
 import { InputSubmit } from './input-submit';
+import { useSocket } from '@/hooks/use-socket';
+import { TypingContainer } from './typing-container';
 
 export function ChatContainer() {
   const guild = useOutletContext() as Guild;
   const { channelId } = useParams() as { channelId: string };
 
   const lastMessageRef = useRef<HTMLDivElement>(null);
+
+  const { sendMessage, typing } = useSocket(channelId);
 
   const {
     data: messagesResult = [],
@@ -101,8 +105,10 @@ export function ChatContainer() {
         })}
       </div>
 
-      <div className="px-6">
-        <InputSubmit />
+      <div className="relative mb-6 px-6">
+        <InputSubmit onSubmit={sendMessage} onType={typing} />
+
+        <TypingContainer />
       </div>
     </Container>
   );

@@ -1,5 +1,7 @@
 import 'express-async-errors';
 
+import { createServer } from 'node:http';
+
 import compression from 'compression';
 import cors from 'cors';
 import express from 'express';
@@ -8,8 +10,12 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import { routes } from './routes';
+import { initWebSocket } from './websocket';
 
 const app = express();
+const server = createServer(app);
+
+const io = initWebSocket(server);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -46,4 +52,4 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 
 app.use(routes);
 
-export { app };
+export { app, server, io };

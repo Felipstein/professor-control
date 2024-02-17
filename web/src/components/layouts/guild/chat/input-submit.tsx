@@ -1,12 +1,30 @@
 import { Input } from '@/components/ui/input';
 import { PaperPlaneIcon } from '@radix-ui/react-icons';
-import { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
-export function InputSubmit() {
+export type InputSubmitProps = {
+  onSubmit?: (message: string) => void;
+  onType?: () => void;
+};
+
+export function InputSubmit({ onSubmit, onType }: InputSubmitProps) {
   const [input, setInput] = useState('');
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+
+    setInput(value);
+    onType?.();
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!input) {
+      return;
+    }
+
+    onSubmit?.(input);
 
     setInput('');
   }
@@ -15,7 +33,7 @@ export function InputSubmit() {
     <form
       noValidate
       onSubmit={handleSubmit}
-      className="mb-6 flex w-full items-center gap-2 rounded-lg bg-muted/40 px-4 py-1.5"
+      className="flex w-full items-center gap-2 rounded-lg bg-muted/40 px-4 py-1.5"
     >
       <PaperPlaneIcon className="size-4 -rotate-45 text-muted-foreground" />
 
@@ -24,7 +42,7 @@ export function InputSubmit() {
         className="w-full border-none bg-transparent p-0 focus-visible:ring-0"
         placeholder="Bora lá..."
         value={input}
-        onChange={(event) => setInput(event.target.value)}
+        onChange={handleChange}
       />
     </form>
   );

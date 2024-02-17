@@ -16,7 +16,7 @@ const LOG_TEMPLATE =
 
 const SHOW_TIMESTAMP = process.env.NODE_ENV !== 'production';
 
-const SHOW_PATH = process.env.NODE_ENV !== 'production';
+const SHOW_PATH = false;
 
 function replaceTimestamp(template: string) {
   if (SHOW_TIMESTAMP) {
