@@ -12,3 +12,4 @@
 - Enviar mensagens no privado
 - Alterar entre bots
 - Alterar o próprio sobrenome no servidor
+- Criar submit inteligente com IA
