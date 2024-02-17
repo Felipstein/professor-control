@@ -3,6 +3,7 @@ import { queryKeys } from '@/config/query-keys';
 import { events } from '@/libs/event-emitter';
 import { getAPIBaseURL } from '@/utils/get-api-base-url';
 import {
+  ReceiveMessageInOtherChannelPayload,
   ReceiveMessagePayload,
   ReceiveTypingPayload,
   SendMessagePayload,
@@ -34,16 +35,38 @@ export function useSocket(channelId: string) {
       );
     }
 
+    function handleReceiveMessageInOtherChannel(
+      payload: ReceiveMessageInOtherChannelPayload,
+    ) {
+      const { channelId: channelIdReceived } = payload;
+
+      if (channelIdReceived === channelId) {
+        return;
+      }
+
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.getMessages({ channelId: channelIdReceived }),
+      });
+    }
+
     function handleReceiveTyping(payload: ReceiveTypingPayload) {
       events.emit('typing', payload);
     }
 
     socket.on('receive-message', handleReceiveMessage);
     socket.on('receive-typing', handleReceiveTyping);
+    socket.on(
+      'receive-message-in-other-channel',
+      handleReceiveMessageInOtherChannel,
+    );
 
     return () => {
       socket.off('receive-message', handleReceiveMessage);
       socket.off('receive-typing', handleReceiveTyping);
+      socket.off(
+        'receive-message-in-other-channel',
+        handleReceiveMessageInOtherChannel,
+      );
 
       socket.emit('leaveChannel', channelId);
     };

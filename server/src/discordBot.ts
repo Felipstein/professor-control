@@ -1,5 +1,6 @@
 import { mainLogger } from '@infra/logger';
 import {
+  ReceiveMessageInOtherChannelPayload,
   ReceiveMessagePayload,
   ReceiveTypingPayload,
 } from '@professor-control/contracts';
@@ -38,6 +39,7 @@ client.on('messageCreate', async (message) => {
 
   const {
     channel: { id: channelId },
+    guildId,
     author,
     ...messagePayload
   } = message;
@@ -64,12 +66,26 @@ client.on('messageCreate', async (message) => {
   };
 
   io.to(channelId).emit('receive-message', payload);
+
+  if (guildId) {
+    const payload2: ReceiveMessageInOtherChannelPayload = {
+      channelId,
+      guildId,
+    };
+
+    io.emit('receive-message-in-other-channel', payload2);
+  }
 });
 
 client.on('typingStart', async (typing) => {
   const {
     channel: { id: channelId },
+    user: { id: userId },
   } = typing;
+
+  if (userId === client.user?.id) {
+    return;
+  }
 
   const payload: ReceiveTypingPayload = {
     channelId,
