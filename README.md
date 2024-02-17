@@ -13,3 +13,4 @@
 - Alterar entre bots
 - Alterar o próprio sobrenome no servidor
 - Criar submit inteligente com IA
+- Buscar por mensagens antigas quando scrollar para cima
