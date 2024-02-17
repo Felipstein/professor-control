@@ -12,6 +12,7 @@ export type GuildAvatarProps = ComponentProps<typeof Avatar> & {
   src?: string;
   width?: number;
   height?: number;
+  extension?: 'png' | 'gif' | null;
 };
 
 export function GuildAvatar({
@@ -22,6 +23,7 @@ export function GuildAvatar({
   classNameForImage,
   width,
   height,
+  extension,
   ...props
 }: GuildAvatarProps) {
   const guildNameAbbreviation =
@@ -29,7 +31,7 @@ export function GuildAvatar({
 
   const src =
     srcByProps ||
-    (guildId && avatarKey && getGuildAvatarURL(guildId, avatarKey));
+    (guildId && avatarKey && getGuildAvatarURL(guildId, avatarKey, extension));
 
   return (
     <Avatar {...props}>
